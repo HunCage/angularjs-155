@@ -2,30 +2,36 @@ webapp.controller("bodyController", [
 	"$scope",
 	"$http",
 	"userFactory",
-	function ($scope, $http, userFactory) {
-		$scope.isLoggedIn = true;
-		// $scope.isLoggedIn = false;
+	"$rootScope",
+	function ($scope, $http, userFactory, $rootScope) {
+		// $scope.isLoggedIn = true;
+		$scope.isLoggedIn = false;
 
 		$scope.defaultContent = "index";
-		$scope.currentContentName = '';
+		$scope.currentContentName = "";
 
 		$scope.name = "Jeffrey";
 
 		$scope.users = [];
 
-		$scope.doLogin = function () {
-			if (!$scope.loginData) {
+		userFactory.checkLogin().then(function (res) {
+			$scope.isLoggedIn = res.loggedIn;
+			$scope.currentUser = res.user;
+		});
+
+		$scope.doLogin = function (loginData) {
+			if (!loginData) {
 				alert("Please fill the required fields!");
 				return;
 			}
 
-			if (!$scope.loginData.email || !$scope.loginData.pass) {
+			if (!loginData.email || !loginData.pass) {
 				alert("Invalid username or password!");
 				return;
 			}
 
-			userFactory.checkLogin($scope.loginData).then(function (loggedIn) {
-				$scope.isLoggedIn = loggedIn;
+			userFactory.doLogin(loginData).then(function (serverData) {
+				$scope.isLoggedIn = serverData.loggedIn;
 			});
 		};
 		$scope.getTemplate = function (name) {
@@ -42,6 +48,15 @@ webapp.controller("bodyController", [
 			$scope.currentContent = $scope.getTemplate("content/" + name);
 		};
 
-		$scope.getContent();
+		// $scope.getContent();
+
+		$rootScope.$on("$routeChangeSuccess", function (oldRoute, newRoute) {
+			if (angular.isUndefined(name)) {
+				name = $scope.defaultContent;
+			} else {
+				$scope.currentContentName =
+					newRoute.$$route.originalPath.replace("/", "");
+			}
+		});
 	},
 ]);

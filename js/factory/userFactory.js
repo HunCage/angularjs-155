@@ -4,37 +4,41 @@ webapp.factory("userFactory", [
 	"$http",
 	function ($q, $http) {
 		return {
-			checkLogin: function (loginData) {
+			doLogin: function (loginData) {
+				let deferred = $q.defer();
 
-                let deferred = $q.defer();
+				$http
+					.post("/dologin", loginData)
+					.then(function (loginResponse) {
+						deferred.resolve(loginResponse.data);
+					});
 
-                this.getUsers().then(function(users) {
-                    let loggedIn = false;
-    
-                    for (let k in users) {
-                        if (users[k].email === loginData.email && users[k].pass === loginData.pass) {
-                            loggedIn = true;
-                        }
-                    }
-                    deferred.resolve(loggedIn);
+				return deferred.promise;
+			},
 
-                }, function(error) {
-                    console.error("server connection error");
-                    deferred.resolve(loggedIn);
+			checkLogin: function () {
+				let deferred = $q.defer();
 
-                });
+				$http
+					.get("/checkLogin")
+					.then(function (loginResponse) {
+						deferred.resolve(loginResponse.data);
+					});
 
-                return deferred.promise;
-            },
+				return deferred.promise;
+			},
 
 			getUsers: function () {
-                let deferred = $q.defer();
-				$http.get("json/user.json").then(function (serverData) {
-					deferred.resolve(serverData.data);
-				}, function(error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
+				let deferred = $q.defer();
+				$http.get("/users").then(
+					function (serverData) {
+						deferred.resolve(serverData.data);
+					},
+					function (error) {
+						deferred.reject(error);
+					}
+				);
+				return deferred.promise;
 			},
 		};
 	},
