@@ -1,0 +1,132 @@
+body {
+	margin-top: 0;
+}
+.container {
+	margin: 70px auto;
+	width: 960px;
+	/* background-image: url('../img/bg.jpg'); */
+}
+
+.rounded {
+	padding: 7px 15px;
+	font-size: 24px;
+	background: linear-gradient(
+		rgb(240, 240, 240),
+		rgb(227, 227, 227),
+		rgb(240, 240, 240)
+	);
+	border: solid 1px rgb(240, 240, 240);
+	border-radius: 2px;
+}
+
+.image-card {
+	width: 240px;
+	height: 320px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	font-family: "Roboto", sans-serif;
+	display: inline-block;
+	margin-right: 10px;
+}
+.image-card .image-card-img {
+	width: 100%;
+}
+.image-card .title {
+	text-align: center;
+	font-size: 1.3em;
+	padding: 20px;
+	text-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+	font-weight: 400;
+}
+.image-card .content {
+	text-align: justify;
+	padding: 5px 15px;
+	overflow: hidden;
+	font-weight: 500;
+}
+.image-card .content i {
+	font-size: 0.7em;
+}
+.image-card .content.more {
+	height: 0.9em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.card-2 {
+	/* transform: 
+        translate(50px, 100px) 
+        rotate(90deg) 
+        scale(1, 1); */
+	/* transform: matrix( 1, 0, 0, 1, 50, 100 ); */
+	/* transform: rotate3d(1, 1, 0, 50deg); */
+	transition: all 1s;
+}
+/* .card-2:hover {
+	transform: rotateY(180deg);
+}
+
+.card-2:hover .back {
+	display: block;
+	opacity: 0;
+}
+.card-2:hover .front {
+	opacity: 0;
+} */
+
+.image-card .back {
+	background-color: white;
+	opacity: 0;
+}
+.image-card .front,
+.image-card .back {
+	width: 100%;
+	height: 100%;
+	transition: all 0.25s;
+	position: absolute;
+	width: 240px;
+	height: 320px;
+}
+
+/* Animáljuk a színt. */
+/* .image-card .front {
+    animation-name: example;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    background-color: #e8a9a9;
+} */
+@keyframes example {
+    0% {background-color: aqua;}
+    50% {background-color: #e8a9a9;}
+    100% {background-color: aqua;}
+}
+
+/* Töltő animáció. */
+.preloader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    overflow: hidden;
+}
+.preloader-indicator {
+    position: absolute;
+    display: inline-block;
+    width: 25%;
+    height: 5px;
+    margin-left: 110%;
+    background: linear-gradient(
+        90deg,
+        rgba(100, 149, 237, 0) 10%,
+        rgb(100, 149, 237) 80%,
+        rgba(100, 149, 237, 0) 10%
+    );
+    animation-name: preload;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+/* @keyframes preload {
+    0% {margin-left: -25%}
+    100% {margin-left: 125%}
+} */

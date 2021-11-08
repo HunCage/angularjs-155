@@ -1,0 +1,45 @@
+[
+    {
+        "name": "Jeffrey",
+        "age": 42,
+        "address": "New York",
+        "job": "programmer",
+        "email": "jeff@gmail.com",
+        "pass": "jeffrey"
+    },{
+        "name": "Joe",
+        "age": 42,
+        "address": "New York",
+        "job": "programmer",
+        "email": "joe@gmail.com",
+        "pass": "jeffrey"
+    },{
+        "name": "Jack",
+        "age": 42,
+        "address": "New York",
+        "job": "programmer",
+        "email": "jack@gmail.com",
+        "pass": "jeffrey"
+    },{
+        "name": "Ádám",
+        "age": 42,
+        "address": "New York",
+        "job": "programmer",
+        "email": "adam@gmail.com",
+        "pass": "jeffrey"
+    },{
+        "name": "Zsuzsi",
+        "age": 42,
+        "address": "New York",
+        "job": "programmer",
+        "email": "susan@gmail.com",
+        "pass": "jeffrey"
+    },{
+        "name": "Józsi",
+        "age": 42,
+        "address": "New York",
+        "job": "programmer",
+        "email": "stefi@gmail.com",
+        "pass": "jeffrey"
+    }
+]
