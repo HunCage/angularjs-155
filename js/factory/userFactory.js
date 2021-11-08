@@ -4,14 +4,23 @@ webapp.factory("userFactory", [
 	"$http",
 	"$rootScope",
 	function ($q, $http, $rootScope) {
-		return {
+		let factory = {
+			sendResponse: function (defer, response) {
+				if (angular.isDefined(response.loggedIn)) {
+					if (response.loggedIn === false) {
+						$rootScope.$broadcast("noLogin");
+					}
+				}
+				defer.resolve(response);
+			},
+
 			doLogin: function (loginData) {
 				let deferred = $q.defer();
 
 				$http
 					.post("/dologin", loginData)
 					.then(function (loginResponse) {
-						deferred.resolve(loginResponse.data);
+						factory.sendResponse(deferred, loginResponse.data);
 					});
 
 				return deferred.promise;
@@ -21,7 +30,7 @@ webapp.factory("userFactory", [
 				let deferred = $q.defer();
 
 				$http.get("/checkLogin").then(function (loginResponse) {
-					deferred.resolve(loginResponse.data);
+					factory.sendResponse(deferred, loginResponse.data);
 				});
 
 				return deferred.promise;
@@ -31,7 +40,7 @@ webapp.factory("userFactory", [
 				let deferred = $q.defer();
 				$http.get("/users").then(
 					function (serverData) {
-						deferred.resolve(serverData.data);
+						factory.sendResponse(deferred, serverData.data);
 					},
 					function (error) {
 						deferred.reject(error);
@@ -43,10 +52,11 @@ webapp.factory("userFactory", [
 			modUser: function (user) {
 				let deferred = $q.defer();
 				$http.post("/user", user).then(function (res) {
-					deferred.resolve(res);
+					factory.sendResponse(deferred, res.data);
 				});
 				return deferred.promise;
 			},
 		};
+		return factory;
 	},
 ]);

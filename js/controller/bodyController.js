@@ -10,6 +10,10 @@ webapp.controller("bodyController", [
 
 		$scope.name = "Jeffrey";
 
+		$rootScope.$on("noLogin", function () {
+			$scope.isLoggedIn = false;
+		});
+
 		userFactory.checkLogin().then(function (res) {
 			$scope.isLoggedIn = res.loggedIn;
 			$scope.currentUser = res.user;
