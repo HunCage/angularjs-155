@@ -1,2 +1,49 @@
-<h1>Users Managment - <span data-ng-bind="name"></span>!</h1>
-<p class="lead">This content can only be accessed by logged-in users.</p>
+<div class="row mb-5">
+	<div class="col-xs-8 offset-xs-1">
+		<h1>Users Managment - <span data-ng-bind="name"></span>!</h1>
+
+		<p class="lead">
+			This content can only be accessed by logged-in users.
+		</p>
+		<table class="table table-dark">
+			<thead class="text-center">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">name</th>
+					<th scope="col">email</th>
+					<th scope="col">address</th>
+					<th scope="col">age</th>
+					<th scope="col">job</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="user in users track by $index">
+					<th scope="row">{{$index+1}}</th>
+					<td>
+						<input class="form-control" data-ng-model="user.name" />
+					</td>
+					<td>
+						<input class="form-control" data-ng-model="user.email" />
+					</td>
+
+					<td>
+						<input class="form-control" data-ng-model="user.address" />
+					</td>
+
+					<td>
+						<input class="form-control" data-ng-model="user.age" />
+					</td>
+
+					<td>
+						<input class="form-control" data-ng-model="user.job" />
+					</td>
+
+					<td>
+						<button class="btn btn-warning" data-ng-click="modUser(user)">change</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

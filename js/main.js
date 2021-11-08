@@ -7,36 +7,18 @@ webapp.config([
 		$routeProvider
 			.when("/index", {
 				templateUrl: "template/content/index.html",
-                controller: "indexController"
+				controller: "indexController",
 			})
 			.when("/users", {
-                templateUrl: "template/content/users.html",
+				templateUrl: "template/content/users.html",
+				controller: "userController",
 			})
 			.when("/settings", {
-                templateUrl: "template/content/settings.html",
+				templateUrl: "template/content/settings.html",
 			})
 			.otherwise({
-                redirectTo: "/index",
+				redirectTo: "/index",
 			});
-
-		// configure html5 to get links working on jsfiddle
-		// $locationProvider.html5Mode(true);
 	},
 ]);
 
-// webapp.controller("bodyController", [
-// 	"$scope",
-// 	"$http",
-// 	function ($scope, $http) {
-
-// 		$scope.isLoggedIn = false;
-
-// 		$scope.name = "Jeffrey";
-
-// 		$scope.users = [];
-// 		$http.get("json/user.json").then(function (serverData) {
-// 			$scope.users = serverData.data;
-// 			console.log($scope.users);
-// 		});
-// 	},
-// ]);

@@ -4,15 +4,11 @@ webapp.controller("bodyController", [
 	"userFactory",
 	"$rootScope",
 	function ($scope, $http, userFactory, $rootScope) {
-		// $scope.isLoggedIn = true;
 		$scope.isLoggedIn = false;
-
 		$scope.defaultContent = "index";
 		$scope.currentContentName = "";
 
 		$scope.name = "Jeffrey";
-
-		$scope.users = [];
 
 		userFactory.checkLogin().then(function (res) {
 			$scope.isLoggedIn = res.loggedIn;
@@ -47,8 +43,6 @@ webapp.controller("bodyController", [
 
 			$scope.currentContent = $scope.getTemplate("content/" + name);
 		};
-
-		// $scope.getContent();
 
 		$rootScope.$on("$routeChangeSuccess", function (oldRoute, newRoute) {
 			if (angular.isUndefined(name)) {
